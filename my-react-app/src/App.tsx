@@ -1,34 +1,24 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
+import Nav from './components/NavBar';
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
 function App() {
-  const [count, setCount] = useState(0);
-
+  const [openNav, setOpenNav] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div style={{ display: 'flex', height: '100vh' }}>
+      <Nav
+        openNav={openNav}
+        onCloseNav={() => setOpenNav(false)}
+        collapsed={collapsed}
+        setCollapsed={setCollapsed}
+      />
+
+      <main style={{ flexGrow: 1, padding: 20 }}>
+        <Outlet></Outlet>
+      </main>
+    </div>
   );
 }
 
